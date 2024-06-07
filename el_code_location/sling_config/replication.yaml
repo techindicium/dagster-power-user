@@ -1,0 +1,97 @@
+source: AW_S3
+target: AW_SF
+defaults:
+    mode: backfill
+    object: "target_schema.stream_file_folder_stream_file_name"
+    update_key: modifieddate
+    source_options:
+      range: TBD
+      format: csv
+    target_options:
+      column_casing: snake
+    meta:
+      dagster:
+        group: raw_sling
+streams:
+      sap_adventure_works/sales/customer.csv:
+          primary_key:
+            - customerid
+          meta:
+            dagster:
+              asset_key: customer
+
+      sap_adventure_works/sales/salesreason.csv:
+          primary_key:
+            - salesreasonid
+          meta:
+            dagster:
+              asset_key: salesreason
+
+      sap_adventure_works/sales/salesorderheader.csv:
+          primary_key:
+            - salesorderid
+          meta:
+            dagster:
+              asset_key: salesorderheader
+
+      sap_adventure_works/sales/salesorderheadersalesreason.csv:
+          primary_key:
+            - salesorderid
+            - salesreasonid
+          meta:
+            dagster:
+              asset_key: salesorderheadersalesreason
+
+      sap_adventure_works/sales/salesorderdetail.csv:
+          primary_key:
+            - salesorderid
+            - salesorderdetailid
+          meta:
+            dagster:
+              asset_key: salesorderdetail
+
+      sap_adventure_works/sales/creditcard.csv:
+          primary_key:
+            - creditcardid
+          meta:
+            dagster:
+              asset_key: creditcard
+
+      sap_adventure_works/person/person.csv:
+          primary_key:
+            - businessentityid
+          meta:
+            dagster:
+              asset_key: person
+
+      sap_adventure_works/person/stateprovince.csv:
+          primary_key:
+            - stateprovinceid
+          meta:
+            dagster:
+              asset_key: stateprovince
+
+      sap_adventure_works/person/address.csv:
+          primary_key:
+            - addressid
+          meta:
+            dagster:
+              asset_key: address
+
+      sap_adventure_works/person/countryregion.csv:
+          primary_key:
+            - countryregioncode
+          meta:
+            dagster:
+              asset_key: countryregion
+
+      sap_adventure_works/production/product.csv:
+          primary_key:
+            - productid
+          meta:
+            dagster:
+              asset_key: product
+
+
+env:
+  SLING_LOADED_AT_COLUMN: true
