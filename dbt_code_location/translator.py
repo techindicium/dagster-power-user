@@ -4,7 +4,7 @@ from .automation import wait_for_all_parents_policy
 from typing import Mapping, Any, Optional
 
 
-class CustomDbtTranslator(DagsterDbtTranslator):
+class CustomDagsterDbtTranslator(DagsterDbtTranslator):
     @classmethod
     def get_group_name(cls, dbt_resource_props: Mapping[str, Any]) -> Optional[str]:
         """
