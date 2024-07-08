@@ -1,0 +1,16 @@
+version: 2
+ 
+models:
+ - name: dim_produto
+   columns:
+     - name: sk_produto
+       description: A chave surrogate do produto.
+       tests:
+         - unique
+         - not_null
+    
+     - name: id_produto
+       description: A chave natural do produto.
+
+     - name: produto
+       description: Nome do produto.

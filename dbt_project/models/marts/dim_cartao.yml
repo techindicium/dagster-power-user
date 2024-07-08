@@ -1,0 +1,17 @@
+version: 2
+ 
+models:
+ - name: dim_cartao
+   columns:
+     - name: sk_cartao
+       description: A chave surrogate do tipo de cartão.
+       tests:
+         - unique
+         - not_null
+
+     - name: id_cartao
+       description: O identificador do cartão utilizado em um pedido. Necessário para evitar dupicatas na fato.
+
+    
+     - name: tipo_cartao
+       description: O tipo de cartão utilizado em um pedido.

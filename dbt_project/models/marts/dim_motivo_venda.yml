@@ -1,0 +1,16 @@
+version: 2
+ 
+models:
+ - name: dim_motivo_venda
+   columns:
+     - name: sk_motivo_venda
+       description: A chave surrogate do motivo de venda.
+       tests:
+         - unique
+         - not_null
+    
+     - name: id_motivo_venda
+       description: A chave natural do motivo de venda.
+
+     - name: motivo_venda
+       description: Nome do motivo de venda.

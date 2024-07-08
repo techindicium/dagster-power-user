@@ -1,4 +1,5 @@
-dagster-embedded-elt
 dagster-webserver
+dagster-embedded-elt
 dlt[snowflake]
 dagster-dbt
+dbt-snowflake

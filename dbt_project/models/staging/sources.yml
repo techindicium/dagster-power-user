@@ -1,0 +1,213 @@
+version: 2
+
+sources:
+  - name: indicium-sandbox
+    schema: sap_adw # aqui você deve substituir pelo nome do dataset criado pela ferramenta de ingestão no bigquery
+    description: Essa é a fonte de dados do nosso ERP
+    tables:
+      - name: sales_customer
+        description: Essa é a tabela de clientes do ERP.
+        columns:
+          - name: customerid
+            description: Essa é a chave primária da tabela fonte de clientes.
+            tests:
+              - unique
+              - not_null
+
+          - name: personid
+            description: Essa é a chave estrangeira da tabela fonte de clientes para a tabela fonte de pessoas.
+            tests:
+              - relationships:
+                  field: businessentityid
+                  to: source('indicium-sandbox', 'person_person')
+        meta:
+          dagster:
+            asset_key:
+              - customer
+
+      - name: person_person
+        description: Essa é a tabela de pessoas do ERP.
+        columns:
+          - name: businessentityid
+            description: Essa é a chave primária da tabela fonte de pessoas.
+            tests:
+              - unique
+              - not_null
+        meta:
+          dagster:
+            asset_key:
+              - person
+
+      - name: sales_salesreason
+        description: Essa é a tabela de motivo de vendas do ERP.
+        columns:
+          - name: salesreasonid
+            description: Essa é a chave primária da tabela fonte de motivo de vendas.
+            tests:
+              - unique
+              - not_null
+        meta:
+          dagster:
+            asset_key:
+              - salesreason
+
+
+      - name: person_stateprovince
+        description: Essa é a tabela de estados do ERP.
+        columns:
+          - name: stateprovinceid
+            description: Essa é a chave primária da tabela fonte de estados.
+            tests:
+              - unique
+              - not_null
+
+          - name: countryregioncode
+            description: Essa é a chave estrangeira da tabela fonte de estados para a tabela de países.
+            tests:
+              - relationships:
+                  field: countryregioncode
+                  to: source('indicium-sandbox', 'person_countryregion')
+        meta:
+          dagster:
+            asset_key:
+              - stateprovince
+
+
+      - name: person_address
+        description: Essa é a tabela de endereços do ERP.
+        columns:
+          - name: addressid
+            description: Essa é a chave primária da tabela fonte de endereços.
+            tests:
+              - unique
+              - not_null
+
+          - name: stateprovinceid
+            description: Essa é a chave estrangeira da tabela fonte de endereços para a tabela de estados.
+            tests:
+              - relationships:
+                  field: stateprovinceid
+                  to: source('indicium-sandbox', 'person_stateprovince')
+        meta:
+          dagster:
+            asset_key:
+              - address
+
+
+      - name: person_countryregion
+        description: Essa é a tabela de países do ERP.
+        columns:
+          - name: countryregioncode
+            description: Essa é a chave primária da tabela fonte de países.
+            tests:
+              - unique
+              - not_null
+        meta:
+          dagster:
+            asset_key:
+              - countryregion
+
+
+      - name: sales_salesorderheader
+        description: Essa é a tabela de cabeçalhos de pedidos de vendas do ERP.
+        columns:
+          - name: salesorderid
+            description: Essa é a chave primária da tabela fonte de cabeçalhos de pedidos de vendas.
+            tests:
+              - unique
+              - not_null
+
+          - name: creditcardid
+            description: Essa é a chave estrangeira da tabela fonte de cabeçalhos de pedidos de vendas para a tabela de cartões.
+            tests:
+              - relationships:
+                  field: creditcardid
+                  to: source('indicium-sandbox', 'sales_creditcard')
+        meta:
+          dagster:
+            asset_key:
+              - salesorderheader
+
+
+      - name: sales_salesorderdetail
+        description: Essa é a tabela de detalhamento de pedidos de vendas do ERP.
+        columns:
+          - name: salesorderdetailid
+            description: Essa é umaa chave primária composta da tabela fonte de detalhamento de pedidos de vendas.
+            tests:
+              - not_null
+
+          - name: salesorderid
+            description: Essa é uma chave primária composta da tabela fonte de detalhamento de pedidos e a chave estrangeira da tabela fonte de detalhamento de pedidos de vendas para a de cabeçalho de vendas.
+            tests:
+              - not_null
+              - relationships:
+                  field: salesorderid
+                  to: source('indicium-sandbox', 'sales_salesorderheader')
+        tests:
+          - dbt_utils.unique_combination_of_columns:
+              combination_of_columns:
+                - salesorderid
+                - salesorderdetailid
+        meta:
+          dagster:
+            asset_key:
+              - salesorderdetail
+
+
+      - name: production_product
+        description: Essa é a tabela de produtos do ERP.
+        columns:
+          - name: productid
+            description: Essa é a chave primária da tabela fonte de produtos.
+            tests:
+              - unique
+              - not_null
+        meta:
+          dagster:
+            asset_key:
+              - product
+
+
+      - name: sales_creditcard
+        description: Essa é a tabela de cartões de crédito do ERP.
+        columns:
+          - name: creditcardid
+            description: Essa é a chave primária da tabela fonte de cartões de crédito.
+            tests:
+              - unique
+              - not_null
+        meta:
+          dagster:
+            asset_key:
+              - creditcard
+
+
+      - name: sales_salesorderheadersalesreason
+        description: Esta é a tabela de junção (muitos para muitos) entre cabeçalho de peidos e motivos de vendas.
+        columns:
+          - name: salesorderid
+            description: Esta é uma chave primária composta desta tabela de ligação e a chave estrangeira para a tabela de cabeçalhos de pedidos.
+            tests:
+              - not_null
+              - relationships:
+                  field: salesorderid
+                  to: source('indicium-sandbox', 'sales_salesorderheader')
+
+          - name: salesreasonid
+            description: Esta é uma chave primária composta desta tabela de ligação e a chave estrangeira para a tabela de motivos de venda.
+            tests:
+              - not_null
+              - relationships:
+                  field: salesreasonid
+                  to: source('indicium-sandbox', 'sales_salesreason')
+        tests:
+          - dbt_utils.unique_combination_of_columns:
+              combination_of_columns:
+                - salesorderid
+                - salesreasonid
+        meta:
+          dagster:
+            asset_key:
+              - salesorderheadersalesreason
+

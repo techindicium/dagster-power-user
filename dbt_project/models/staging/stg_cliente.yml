@@ -1,0 +1,16 @@
+version: 2
+ 
+models:
+ - name: stg_cliente
+   columns:
+     - name: id_cliente
+       description: Código identificador do cliente.
+       tests:
+         - unique
+         - not_null
+    
+     - name: id_pessoa
+       description: Código identificador do cliente na tabela fonte de pessoas. Necessário para recuperar a informação de nome do cliente.
+       tests:
+         - unique
+       

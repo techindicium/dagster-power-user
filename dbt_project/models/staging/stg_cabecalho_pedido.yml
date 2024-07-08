@@ -1,0 +1,29 @@
+version: 2
+ 
+models:
+ - name: stg_cabecalho_pedido
+   columns:
+     - name: id_venda
+       description: Código identificador do pedido.
+       tests:
+         - unique
+         - not_null
+    
+     - name: data_venda
+       description: A data do pedido.
+       tests:
+         - not_null
+
+     - name: id_cliente
+       description: Código identificador do cliente que realizou o pedido.
+       tests:
+         - not_null
+
+     - name: id_endereco_fatura
+       description: Código identificador do endereço associado ao pedido. Usado para definir a localidade do pedido.
+       tests:
+         - not_null
+
+     - name: id_cartao
+       description: Código identificador do cartão do cliente, caso a compra tenha sido feita por cartão.
+       

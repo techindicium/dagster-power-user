@@ -1,0 +1,68 @@
+version: 2
+ 
+models:
+ - name: fct_linhas_pedidos
+   columns:
+     - name: id_venda
+       description: O id do pedido (dimensão degenerada) do qual esta linha faz parte.
+       tests:
+         - not_null
+
+     - name: data_venda
+       description: A chave estrangeira para a dimensão de data de venda.
+       tests:
+         - relationships:
+               to: ref('dim_data_venda')
+               field: 'data_venda'
+
+     - name: fk_produto
+       description: A chave estrengeira para a dimensão de produto.
+       tests:
+         - relationships:
+               to: ref('dim_produto')
+               field: 'sk_produto'
+
+     - name: fk_localidade
+       description: A chave estrengeira para a dimensão de localidade.
+       tests:
+         - relationships:
+               to: ref('dim_localidade')
+               field: 'sk_localidade'
+    
+     - name: fk_cliente
+       description: A chave estrengeira para a dimensão de clientes.
+       tests:
+         - relationships:
+               to: ref('dim_cliente')
+               field: 'sk_cliente'
+     
+     - name: fk_cartao
+       description: A chave estrengeira para a dimensão de cartao.
+       tests:
+         - relationships:
+               to: ref('dim_cartao')
+               field: 'sk_cartao'
+    
+     - name: fk_motivo_venda
+       description: A chave estrengeira para a dimensão de motivo de venda.
+       tests:
+         - relationships:
+               to: ref('dim_motivo_venda')
+               field: 'sk_motivo_venda'
+
+     - name: quantidade_comprada_alocada_por_motivo
+       description: Quantidade total de produtos comprados, alocado igualmente por motivo de venda.
+       tests: 
+         - positive
+
+     - name: vendas_brutas_alocadas_por_motivo
+       description: Valor total dos produtos comprados (sem desconto), alocado igualmente por motivo de venda.
+       tests: 
+         - positive
+
+     - name: vendas_liquidas_alocadas_por_motivo
+       description: Valor líquido dos produtos comprados (com desconto), alocado igualmente por motivo de venda.
+       tests: 
+         - positive
+         - not_greater_than:
+            field: vendas_brutas_alocadas_por_motivo

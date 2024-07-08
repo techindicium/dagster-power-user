@@ -1,0 +1,16 @@
+version: 2
+ 
+models:
+ - name: dim_cliente
+   columns:
+     - name: sk_cliente
+       description: A chave surrogate do cliente.
+       tests:
+         - unique
+         - not_null
+    
+     - name: id_cliente
+       description: A chave natural do cliente.
+
+     - name: nome_completo
+       description: Nome completo do cliente.

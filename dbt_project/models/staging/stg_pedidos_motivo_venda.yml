@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: stg_pedidos_motivo_venda
+    columns:
+      - name: id_venda
+        description: O código identificador do pedido.
+        tests:
+          - not_null
+
+      - name: id_motivo_venda
+        description: O código identificador do motivo de venda.
+        tests:
+          - not_null
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - id_venda
+            - id_motivo_venda

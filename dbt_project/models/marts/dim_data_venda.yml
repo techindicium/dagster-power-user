@@ -1,0 +1,13 @@
+version: 2
+ 
+models:
+ - name: dim_data_venda
+   columns:
+     - name: data_venda
+       description: A data de venda.
+    
+     - name: mes
+       description: O mês da data de venda.
+
+     - name: ano
+       description: O ano da data de venda.

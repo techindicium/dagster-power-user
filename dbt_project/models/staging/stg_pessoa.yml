@@ -1,0 +1,16 @@
+version: 2
+ 
+models:
+ - name: stg_pessoa
+   columns:
+     - name: id_entidade_negocio
+       description: O código identificador da pessoa como entidade de negócio. 
+       tests:
+         - not_null
+         - unique
+    
+     - name: nome_completo
+       description: Nome completo da pessoa.
+       tests:
+         - not_null
+

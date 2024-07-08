@@ -1,0 +1,21 @@
+version: 2
+ 
+models:
+ - name: stg_estado
+   columns:
+     - name: id_estado
+       description: Código identificador do estado. 
+       tests:
+         - unique
+         - not_null
+    
+     - name: estado
+       description: Nome do estado.
+       tests:
+         - not_null
+         - unique
+    
+     - name: codigo_pais
+       description: Código identificador do país onde se localiza o estado.
+       tests:
+         - not_null

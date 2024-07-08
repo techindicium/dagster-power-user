@@ -1,0 +1,17 @@
+version: 2
+ 
+models:
+ - name: stg_motivo_venda
+   columns:
+     - name: id_motivo_venda
+       description: Código identificador do motivo de venda. 
+       tests:
+         - unique
+         - not_null
+    
+     - name: motivo_venda
+       description: Nome do motivo de venda.
+       tests:
+         - not_null
+         - unique
+

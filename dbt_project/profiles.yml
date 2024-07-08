@@ -1,0 +1,25 @@
+default:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: "{{ env_var('SF_ACCOUNT_ID') }}"
+
+      # User/password auth
+      user: "{{ env_var('SF_USER') }}"
+      password: "{{ env_var('SF_PASSWORD') }}"
+
+      role: "{{ env_var('SF_ROLE') }}"
+      database: "{{ env_var('SF_DATABASE') }}"
+      warehouse: "{{ env_var('SF_WAREHOUSE') }}"
+      schema: "{{ env_var('SF_SCHEMA') }}"
+      threads: 8
+      client_session_keep_alive: False
+      query_tag: dagster-ecs-poc
+
+      # optional
+      connect_retries: 0 # default 0
+      connect_timeout: 10 # default: 10
+      retry_on_database_errors: False # default: false
+      retry_all: False  # default: false
+      reuse_connections: False # default: false (available v1.4+)

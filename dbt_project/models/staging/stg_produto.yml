@@ -1,0 +1,17 @@
+version: 2
+ 
+models:
+ - name: stg_produto
+   columns:
+     - name: id_produto
+       description: O código identificador do produto. 
+       tests:
+         - not_null
+         - unique
+    
+     - name: produto
+       description: O nome do produto.
+       tests:
+         - unique
+         - not_null
+

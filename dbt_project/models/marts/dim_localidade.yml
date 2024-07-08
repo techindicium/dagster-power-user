@@ -1,0 +1,22 @@
+version: 2
+ 
+models:
+ - name: dim_localidade
+   columns:
+     - name: sk_localidade
+       description: A chave surrogate de localidade.
+       tests:
+         - unique
+         - not_null
+    
+     - name: id_localidade
+       description: A chave natural da localidade (endereço). Necessário para evitar duplicatas na fato.
+    
+     - name: cidade
+       description: Nome da cidade da localidade.
+    
+     - name: estado
+       description: Nome do estado da localidade.
+     
+     - name: pais
+       description: Nome do país da localidade.

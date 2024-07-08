@@ -1,0 +1,20 @@
+version: 2
+ 
+models:
+ - name: stg_endereco
+   columns:
+     - name: id_endereco
+       description: Código identificador do endereço. Necessário para definir a localidade do pedido. 
+       tests:
+         - unique
+         - not_null
+    
+     - name: cidade
+       description: Nome da cidade onde se localiza o endereço.
+       tests:
+         - not_null
+    
+     - name: id_estado
+       description: Código identificador do estado onde se localiza a cidade do endereço.
+       tests:
+         - not_null

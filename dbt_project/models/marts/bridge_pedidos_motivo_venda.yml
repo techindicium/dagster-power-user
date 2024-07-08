@@ -1,0 +1,21 @@
+version: 2
+ 
+models:
+ - name: bridge_pedidos_motivo_venda
+   description: Tabela de ligação para a relação de um para muitos entre um pedido e a dimensão de motivo de venda.
+   columns:
+     - name: id_venda
+       description: A chave estrangeira para dimensão degenerada de pedidos e chave primária composta deste tabela.
+       tests:
+         - not_null
+         - relationships:
+             field: id_venda
+             to: ref('stg_pedidos_motivo_venda')
+
+     - name: sk_motivo_venda
+       description: A chave surrogate para dimensão de motivo de venda e chave primária composta deste tabela.
+       tests:
+         - not_null
+         - relationships:
+             field: sk_motivo_venda
+             to: ref('dim_motivo_venda')

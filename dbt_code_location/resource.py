@@ -24,4 +24,4 @@ if os.getenv("DAGSTER_DBT_PARSE_PROJECT_ON_LOAD"):
         .target_path.joinpath("manifest.json")
     )
 else:
-    dbt_manifest_path = dbt_project_dir.joinpath("target", "manifest.json")
+    dbt_manifest_path = Path(dbt_project_dir).joinpath("target", "manifest.json")

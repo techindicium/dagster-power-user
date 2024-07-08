@@ -1,0 +1,16 @@
+version: 2
+ 
+models:
+ - name: stg_cartao
+   columns:
+     - name: id_cartao
+       description: Código identificador do cartão.
+       tests:
+         - unique
+         - not_null
+    
+     - name: tipo_cartao
+       description: O tipo do cartão utilizado.
+       tests:
+         - not_null
+       

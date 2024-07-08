@@ -1,0 +1,17 @@
+version: 2
+ 
+models:
+ - name: stg_pais
+   columns:
+     - name: codigo_pais
+       description: Código identificador do país. 
+       tests:
+         - unique
+         - not_null
+    
+     - name: pais
+       description: Nome do país.
+       tests:
+         - not_null
+         - unique
+
