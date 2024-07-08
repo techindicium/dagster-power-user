@@ -20,5 +20,20 @@ pip install -r requirements.txt
 - For visualizing the el assets, run:
 
 ```bash
-dagster dev -m el_code_location
+dagster dev -m definitions -d el_code_location
 ```
+
+- For visualizing the dbt assets, run:
+
+```bash
+dagster dev -m definitions -d dbt_code_location
+```
+
+## Production Deployment Tips
+
+For simplicity, we are developing using a single repo for all assets. A better practice for production
+deployments would consist of using 3 repos - at least in similar contexts to this project:
+
+- IaC repo: with the contents of the [infra module](./infra/)
+- el repo: with the contents of the [el code location module](./el_code_location/)
+- dbt repo: with the contents of the [dbt code location module](./dbt_code_location/)

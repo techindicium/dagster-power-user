@@ -14,13 +14,13 @@ from dagster import (
 )
 
 from dlt import pipeline
-from .dlt_config.source import worldbank
-from .dlt_config.destination import aw_snowflake
+from dlt_config.source import worldbank
+from dlt_config.destination import aw_snowflake
 
 from .translators import CustomDagsterSlingTranslator, CustomDagsterDltTranslator
 from .partitions import aw_partitions_def, worldbank_partitions_def
 
-replication_path = file_relative_path(__file__, "sling_config/replication.yaml")
+replication_path = file_relative_path(__file__, "../sling_config/replication.yaml")
 
 
 @sling_assets(
