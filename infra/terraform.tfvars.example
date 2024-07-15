@@ -1,0 +1,30 @@
+image_tags = {
+  "webserver" = "v0.0.1"
+  "daemon"    = "v0.0.1"
+}
+location_image_tags = {
+  "el" = "v0.0.1"
+  "dbt" = "v0.0.1"
+}
+root_zone_id = "xxx"
+domain_name  = "xxx"
+el_env = {
+  "S3_BUCKET"    = "xxx"
+  "AWS_ACCESS_KEY_ID"      = "xxx"
+  "AWS_SECRET_ACCESS_KEY" = "xxx"
+  "SF_HOST"      = "xxx"
+  "SF_USER"      = "xxx"
+  "SF_DATABASE"  = "xxx"
+  "SF_PASSWORD"  = "xxx"
+  "SF_ROLE"      = "xxx"
+  "SF_WAREHOUSE" = "xxx"
+  "SF_SCHEMA"    = "xxx"
+  "PARTITIONS_START_DATE" = "2014-01-01"
+}
+dbt_env = {
+  SF_ACCOUNT_ID   = "xxx"
+  SF_USER         = "xxx"
+  SF_PASSWORD     = "xxx"
+  SF_ROLE         = "xxx"
+  DBT_EXECUTABLE_PATH = "/usr/local/bin/dbt"
+}

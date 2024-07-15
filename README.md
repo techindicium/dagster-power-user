@@ -29,6 +29,45 @@ dagster dev -m definitions -d el_code_location
 dagster dev -m definitions -d dbt_code_location
 ```
 
+- Before proceeding to the actual deployment, create an S3 bucket (name suggestion: `dagster-ecs-poc-support-bucket`) and upload the
+[`sap_adventure_works` folder](./source_data/sap_adventure_works/) to its root.
+
+## Deployment
+
+- Installs: [Terraform, AWS CLI, Docker]
+- Create a `.env` file based on `.env.example`
+- Create a `terraform.tfvars` file based on `terraform.tfvars.example`
+- Run `chmod -R +x scripts`
+- If needed, setup an appropriate bucket and region to store terraform state in the `config.s3.tfbackend` file. Then, do one of the following before apply new terraform plans:
+  - Migrate terraform state (recommended): run `./scripts/migrate.sh <stack>`
+  - Reset: in case the previous state is no longer available, run `./scripts/reset.sh <stack>`
+  For a definition of what a stack means, see the following topic.
+
+## Usage
+
+We have four stacks under the `infra` directory, `base`, `cluster`, `dagster`, `locations`. To operate on a given stack, we provide the convenience `scripts`:
+
+- Deployment: `bash scripts/deploy.sh <stack>`
+- Retraction: `bash scripts/retract.sh <stack>`
+
+Therefore, for a full deployment, one should run:
+
+```bash
+bash scripts/deploy.sh base
+bash scripts/deploy.sh cluster
+bash scripts/deploy.sh dagster
+bash scripts/deploy.sh locations
+```
+
+Conversely, for full retraction of the infrastructure, we execute:
+
+```bash
+bash scripts/retract.sh locations
+bash scripts/retract.sh dagster
+bash scripts/retract.sh cluster
+bash scripts/retract.sh base
+```
+
 ## Production Deployment Tips
 
 For simplicity, we are developing using a single repo for all assets. A better practice for production
