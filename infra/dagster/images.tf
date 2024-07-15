@@ -11,12 +11,11 @@ resource "docker_image" "dagster" {
   for_each = module.ecr
   name     = "${each.value.repository_url}:${var.image_tags[each.key]}"
   build {
-    context = "./build/"
+    context = "./docker/"
     target  = each.key == "daemon" ? "dagster" : each.key
   }
   triggers = {
-    dir_sha1 = sha1(join("", [for f in fileset(path.module, "build/*") : filesha1(f)]))
+    dir_sha1 = sha1(join("", [for f in fileset(path.module, "docker/*") : filesha1(f)]))
   }
   keep_locally = true
 }
-

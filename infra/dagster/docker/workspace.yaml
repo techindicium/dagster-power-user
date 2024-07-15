@@ -1,0 +1,10 @@
+load_from:
+    # Each entry here corresponds to a service in the docker-compose file that exposes jobs.
+    - grpc_server:
+          host: el-code-location
+          port: 4000
+          location_name: "el_code_location"
+    - grpc_server:
+          host: dbt-code-location
+          port: 4000
+          location_name: "dbt_code_location"
