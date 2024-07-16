@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    key = "infra/cluster/terraform.tfstate"
+    key = "infra/core/terraform.tfstate"
   }
 
   required_providers {

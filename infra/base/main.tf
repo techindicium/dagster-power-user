@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    key = "infra/persistence/terraform.tfstate"
+    key = "infra/base/terraform.tfstate"
   }
 
   required_providers {

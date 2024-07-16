@@ -45,7 +45,7 @@ dagster dev -m definitions -d dbt_code_location
 
 ## Usage
 
-We have four stacks under the `infra` directory, `base`, `cluster`, `dagster`, `locations`. To operate on a given stack, we provide the convenience `scripts`:
+We have four stacks under the `infra` directory, `base`, `core`, `dagster`, `locations`. To operate on a given stack, we provide the convenience `scripts`:
 
 - Deployment: `bash scripts/deploy.sh <stack>`
 - Retraction: `bash scripts/retract.sh <stack>`
