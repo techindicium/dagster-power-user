@@ -10,7 +10,7 @@ class CustomDagsterDbtTranslator(DagsterDbtTranslator):
         """
         Sets dagster asset group as dbt model schema.
         """
-        return dbt_resource_props["schema"]
+        return dbt_resource_props["schema"].lower()
 
     @classmethod
     def get_auto_materialize_policy(

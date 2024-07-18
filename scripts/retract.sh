@@ -9,7 +9,7 @@ init() {
 
 destroy() {
     echo -e "\n Retracting terraform configuration for module $1... \n"
-    terraform "-chdir=$1" plan -out=tfplan -destroy -var-file="../terraform.tfvars"
+    terraform "-chdir=$1" plan -out=tfplan -destroy -var-file="../terraform.tfvars" -compact-warnings
     terraform "-chdir=$1" apply tfplan
 }
 

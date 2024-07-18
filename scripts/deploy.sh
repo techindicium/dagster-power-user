@@ -9,7 +9,7 @@ init() {
 
 apply() {
     echo -e "\n Deploying terraform configuration for module $1... \n"
-    terraform "-chdir=$1" plan -out=tfplan -var-file="../terraform.tfvars"
+    terraform "-chdir=$1" plan -out=tfplan -var-file="../terraform.tfvars" -compact-warnings
     terraform "-chdir=$1" apply tfplan
 }
 
@@ -23,4 +23,3 @@ echo -e "\n Exporting environment variables... \n"
 source .env
 
 deploy "infra/$1"
-

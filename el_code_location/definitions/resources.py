@@ -21,6 +21,7 @@ target = SlingConnectionResource(
     database=EnvVar("SF_DATABASE"),
     user=EnvVar("SF_USER"),
     password=EnvVar("SF_PASSWORD"),
+    private_key_path=EnvVar("SF_P8_KEY_PATH"),
     schema=EnvVar("SF_SCHEMA"),
     role=EnvVar("SF_ROLE"),
     warehouse=EnvVar("SF_WAREHOUSE"),

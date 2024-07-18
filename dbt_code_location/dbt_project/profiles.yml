@@ -5,9 +5,9 @@ default:
       type: snowflake
       account: "{{ env_var('DBT_SF_HOST') }}"
 
-      # User/password auth
+      # private key auth
       user: "{{ env_var('DBT_SF_USER') }}"
-      password: "{{ env_var('DBT_SF_PASSWORD') }}"
+      private_key_path: "{{ env_var('DBT_SF_P8_KEY_PATH') }}"
 
       role: "{{ env_var('DBT_SF_ROLE') }}"
       database: "{{ env_var('DBT_SF_DATABASE') }}"
