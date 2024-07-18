@@ -14,7 +14,7 @@ resource "docker_image" "locations" {
     context = "../../${each.key}_code_location"
   }
   triggers = {
-    dir_sha1 = sha1(join("", [for f in fileset("${path.module}/../../${each.key}_code_location", "**") : filesha1(f)]))
+    dir_sha1 = sha1(join("", [for f in fileset("${path.module}/../../${each.key}_code_location", "**") : filesha1("${path.module}/../../${each.key}_code_location/${f}")]))
   }
   keep_locally = true
 }

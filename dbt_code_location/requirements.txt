@@ -2,3 +2,4 @@ dagster-postgres
 dagster-aws
 dagster-dbt
 dbt-snowflake
+dbt-core

@@ -3,16 +3,16 @@ default:
   outputs:
     dev:
       type: snowflake
-      account: "{{ env_var('SF_HOST') }}"
+      account: "{{ env_var('DBT_SF_HOST') }}"
 
       # User/password auth
-      user: "{{ env_var('SF_USER') }}"
-      password: "{{ env_var('SF_PASSWORD') }}"
+      user: "{{ env_var('DBT_SF_USER') }}"
+      password: "{{ env_var('DBT_SF_PASSWORD') }}"
 
-      role: "{{ env_var('SF_ROLE') }}"
-      database: "{{ env_var('SF_DATABASE') }}"
-      warehouse: "{{ env_var('SF_WAREHOUSE') }}"
-      schema: "{{ env_var('SF_SCHEMA') }}"
+      role: "{{ env_var('DBT_SF_ROLE') }}"
+      database: "{{ env_var('DBT_SF_DATABASE') }}"
+      warehouse: "{{ env_var('DBT_SF_WAREHOUSE') }}"
+      schema: "{{ env_var('DBT_SF_SCHEMA') }}"
       threads: 8
       client_session_keep_alive: False
       query_tag: dagster-ecs-poc

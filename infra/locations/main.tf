@@ -9,6 +9,11 @@ terraform {
       version = ">=5.36.0"
     }
 
+    docker = {
+      source  = "kreuzwerker/docker"
+      version = "3.0.2"
+    }
+
   }
 }
 
@@ -18,6 +23,14 @@ provider "aws" {
     tags = {
       Project = local.project_name
     }
+  }
+}
+
+provider "docker" {
+  registry_auth {
+    address  = data.aws_ecr_authorization_token.dagster.proxy_endpoint
+    username = data.aws_ecr_authorization_token.dagster.user_name
+    password = data.aws_ecr_authorization_token.dagster.password
   }
 }
 
@@ -35,6 +48,8 @@ locals {
       "DAGSTER_POSTGRES_DB"
     ]
   )
+  account_id = data.aws_caller_identity.current.account_id
+
 }
 
 
@@ -78,3 +93,9 @@ data "aws_security_group" "postgres" {
   vpc_id = data.aws_vpc.dagster.id
   name   = "${local.project_name}-postgres-sg"
 }
+
+data "aws_ecr_authorization_token" "dagster" {
+  registry_id = local.account_id
+}
+
+data "aws_caller_identity" "current" {}

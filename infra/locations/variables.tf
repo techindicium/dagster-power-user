@@ -11,6 +11,7 @@ variable "location_image_tags" {
 variable "region" {
   type        = string
   description = "The AWS region to deploy resources."
+  default     = "us-east-1"
 }
 
 variable "el_env" {
