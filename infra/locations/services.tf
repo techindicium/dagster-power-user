@@ -24,7 +24,7 @@ module "ecs_service" {
         cloudwatch_log_group_name = "/aws/ecs/${each.key}-code-location"
 
 
-        command = split(" ", "dagster code-server start -h 0.0.0.0 -p 4000 -m definitons")
+        command = split(" ", "dagster code-server start -h 0.0.0.0 -p 4000 -m definitions")
 
         secrets = each.key == "el" ? concat(
           [

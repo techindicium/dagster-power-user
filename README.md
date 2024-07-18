@@ -50,7 +50,9 @@ We have four stacks under the `infra` directory, `base`, `core`, `dagster`, `loc
 - Deployment: `bash scripts/deploy.sh <stack>`
 - Retraction: `bash scripts/retract.sh <stack>`
 
-Therefore, for a full deployment, one should run:
+Therefore, we have the following:
+
+### Full Deployment
 
 ```bash
 bash scripts/deploy.sh base
@@ -59,7 +61,16 @@ bash scripts/deploy.sh dagster
 bash scripts/deploy.sh locations
 ```
 
-Conversely, for full retraction of the infrastructure, we execute:
+*Note: if you keep getting a DNS error at the Dagster UI even after successful deployment of all infra modules, restart the core services. For instance, assuming you are using the standard project name (i.e. `dagster-ecs-poc`):*
+
+```bash
+aws ecs update-service --force-new-deployment --service dagster-daemon --cluster dagster-ecs-poc-cluster
+aws ecs update-service --force-new-deployment --service dagster-webserver --cluster dagster-ecs-poc-cluster
+```
+
+*Then, refresh the page and you should be ready to go!*
+
+### Full Retraction
 
 ```bash
 bash scripts/retract.sh locations
