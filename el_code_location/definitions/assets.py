@@ -4,7 +4,7 @@ from dagster_embedded_elt.sling import (
     SlingResource,
     sling_assets,
 )
-
+from dagster_embedded_elt.sling.asset_decorator import METADATA_KEY_REPLICATION_CONFIG
 from dagster_embedded_elt.dlt import DagsterDltResource, dlt_assets
 
 
@@ -30,7 +30,7 @@ replication_path = file_relative_path(__file__, "../sling_config/replication.yam
 )
 def aw_assets(context: AssetExecutionContext, sling: SlingResource):
     replication_config = next(iter(context.assets_def.metadata_by_key.values())).get(
-        "dagster-embedded-elt/sling_replication_config", {}
+        METADATA_KEY_REPLICATION_CONFIG, {}
     )
     timewindow = context.partition_time_window
     start = timewindow.start.to_date_string()
