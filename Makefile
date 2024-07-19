@@ -1,22 +1,24 @@
-#!/bin/bash
+SHELL := /bin/bash
+export SHELLOPTS := pipefail:errexit
+
+ORDERED_STACKS := ("base" "core" "locations" "dagster")
 
 .PHONY: deploy retract restart
-
-ORDERED_STACKS="base" "core" "locations" "dagster"
 
 .ONESHELL:
 
 deploy:
-	for stack in $(ORDERED_STACKS)
+	stacks=$(ORDERED_STACKS)
+	for stack in "$${stacks[@]}"
 	do
-		bash scripts/deploy.sh "`echo $$stack`"
+		bash scripts/deploy.sh $$stack
 	done
 
 retract:
-	for (( idx=${#ORDERED_STACKS[@]}-1 ; idx>=0 ; idx-- ))
+	stacks=$(ORDERED_STACKS)
+	for (( idx=$${#stacks[@]}-1 ; idx>=0 ; idx-- ))
 	do
-		stack="${ORDERED_STACKS[idx]}"
-		bash scripts/retract.sh $stack
+		bash scripts/retract.sh $${stacks[idx]}
 	done
 
 restart:
